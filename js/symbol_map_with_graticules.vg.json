@@ -21,7 +21,7 @@
       },
       {
         "data": {
-          "url": "/Users/dinildesilva/Desktop/FIT3179/Vegalite/Vegalite-Assets/data/us_tornado_dataset_1950_2021.csv"
+          "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
         },
         "mark": {"type": "circle", "tooltip": {"content": "data"}},
         "encoding": {
@@ -34,7 +34,7 @@
             "scale": {"domain": [4, 8]}
           },
           "color": {
-            "field": "depth",
+            "field": "inj",
             "type": "quantitative",
             "title": "Depth in km",
             "scale": {"scheme": "reds"}

@@ -14,12 +14,12 @@
     },
     {
       "data": {
-        "url": "/Users/dinildesilva/Desktop/FIT3179/Vegalite/Vegalite-Assets/data/us_tornado_dataset_1950_2021.csv"
+        "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
       },
       "mark": {"type": "circle", "tooltip": {"content": "data"}},
       "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
+        "longitude": {"field": "slon", "type": "quantitative"},
+        "latitude": {"field": "slat", "type": "quantitative"},
         "size": {
           "field": "mag",
           "type": "quantitative",

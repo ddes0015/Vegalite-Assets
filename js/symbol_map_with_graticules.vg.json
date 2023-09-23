@@ -39,6 +39,14 @@
         "encoding": {
           "longitude": {"field": "slon", "type": "quantitative"},
           "latitude": {"field": "slat", "type": "quantitative"},
+          "tooltip": [
+            {"field": "yr", "type": "ordinal", "title": "Year"},
+            {"field": "st", "type": "nominal", "title": "State"},
+            {"field": "mag", "type": "quantitative", "title": "Magnitude"},
+            {"field": "wid", "type": "quantitative", "title": "Width (yards)"},
+            {"field": "fat", "type": "quantitative", "title": "Fatalities"},
+            {"field": "inj", "type": "quantitative", "title": "Injured"}
+          ],
           "size": {
             "field": "mag",
             "type": "quantitative",

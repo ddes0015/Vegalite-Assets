@@ -1,6 +1,13 @@
 #symbol_map {
 	top:100px;
 	bottom: 100px; 
-	left: 100px;
+	left: 350px;
 	right: 100px;
+}
+
+#scatter_plot{
+
+	margin-top: 200px;
+	left: 300px;
+
 }

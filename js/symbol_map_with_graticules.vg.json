@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 600,
-    "height": 320,
+    "width": 700,
+    "height": 400,
     "title": "Tornados of magnitude 4 or larger between 1950 and 2021 in the USA",
     "projection": {"type": "albersUsa"},
     "layer": [

@@ -4,142 +4,210 @@
     "height": 400,
     "title": "Deaths against Magnitude",
     "data": {
-      "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
+        "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
     },
     "params": [
-      {
-        "name": "Population_Above",
-        "value": 0,
-        "bind": {
-          "input": "range",
-          "min": 0,
-          "max": 100000000,
-          "step": 1000000,
-          "name": "Minimum Population: "
+        {
+            "name": "Magnitude_above",
+            "value": 0,
+            "bind": {
+                "input": "range",
+                "min": 0,
+                "max": 7,
+                "step": 1,
+                "name": "Minimum Magnitude: "
+            }
+        },
+        {
+            "name": "State_selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    null,
+                    "TX",
+                    "KS",
+                    "OK",
+                    "FL",
+                    "NE",
+                    "IA"
+                ],
+                "labels": [
+                    "Show All",
+                    "Texas",
+                    "Kansas",
+                    "Oklahoma",
+                    "Florida",
+                    "Nebraska",
+                    "Iowa"
+                ],
+                "name": "State Selection: "
+            }
         }
-      },
-      {
-        "name": "Continent_selection",
-        "bind": {
-          "input": "select",
-          "options": [
-            null,
-            "North America",
-            "South America",
-            "Europe",
-            "Africa",
-            "Asia",
-            "Oceania"
-          ],
-          "labels": [
-            "Show All",
-            "North America",
-            "South America",
-            "Europe",
-            "Africa",
-            "Asia",
-            "Oceania"
-          ],
-          "name": "Continent Selection: "
+    ],
+    "transform": [
+        {
+            "filter": "datum.mag > Magnitude_above"
+        },
+        {
+            "filter": "datum.st === 'TX' || datum.st === 'KS' || datum.st === 'OK' || datum.st === 'FL' || datum.st === 'NE' || datum.st === 'IA'"
+        },
+        {
+            "filter": "State_selection == null || datum.st == State_selection"
         }
-      }
     ],
     "encoding": {
-      "x": {
-        "field": "fat",
-        "type": "quantitative",
-        "title": "Fatalities",
-        "axis": {"tickCount": 7}
-      },
-      "y": {
-        "field": "inj",
-        "type": "quantitative",
-        "axis": {"tickCount": 6}
-      }
+        "x": {
+            "field": "fat",
+            "type": "quantitative",
+            "title": "Fatalities",
+            "axis": {
+                "tickCount": 7
+            }
+        },
+        "y": {
+            "field": "inj",
+            "type": "quantitative",
+            "axis": {
+                "tickCount": 6
+            }
+        }
     },
     "layer": [
-      {
-        "mark": "circle",
-        "encoding": {
-          "size": {
-            "field": "mag",
-            "type": "quantitative",
-            "scale": {
-              "type": "threshold",
-              "domain": [1, 5, 10, 100],
-              "range": [10, 50, 150, 200, 300, 400]
-            },
-            "legend": {"format": ".1s"}
-          },
-          "color": {
-            "field": "State",
-            "type": "nominal",
-            "scale": {
-              "domain": [
-                "North America",
-                "South America",
-                "Europe",
-                "Africa",
-                "Asia",
-                "Oceania"
-              ],
-              "range": [
-                "#e41a1c",
-                "#984ea3",
-                "#ff7f00",
-                "#a6cee3",
-                "#377eb8",
-                "#a65628"
-              ]
+        {
+            "mark": "circle",
+            "encoding": {
+                "size": {
+                    "field": "mag",
+                    "type": "quantitative",
+                    "scale": {
+                        "type": "threshold",
+                        "domain": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ],
+                        "range": [
+                            10,
+                            20,
+                            30,
+                            40,
+                            50,
+                            60
+                        ]
+                    },
+                    "legend": {
+                        "format": ".1s"
+                    }
+                },
+                "color": {
+                    "field": "st",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "TX",
+                            "KS",
+                            "OK",
+                            "FL",
+                            "NE",
+                            "IA"
+                        ],
+                        "range": [
+                            "#e41a1c",
+                            "#984ea3",
+                            "#ff7f00",
+                            "#a6cee3",
+                            "#377eb8",
+                            "#a65628"
+                        ]
+                    }
+                },
+                "opacity": {
+                    "value": 0.6
+                },
+                "tooltip": [
+                    {
+                        "field": "st",
+                        "type": "nominal",
+                        "title": "State"
+                    },
+                    {
+                        "field": "inj",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "fat",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "mag",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "wid",
+                        "type": "quantitative",
+                        "format": ","
+                    }
+                ]
             }
-          },
-          "opacity": {"value": 0.6},
-          "tooltip": [
-            {"field": "Country", "type": "nominal"},
-            {"field": "Confirmed", "type": "quantitative", "format": ","},
-            {"field": "Active", "type": "quantitative", "format": ","},
-            {"field": "Deaths", "type": "quantitative", "format": ","},
-            {"field": "Recovered", "type": "quantitative", "format": ","},
-            {
-              "field": "Cases per 10,000 Population",
-              "type": "quantitative",
-              "format": ".2f"
-            }
-          ]
-        }
-      },
-      {
-        "mark": {
-          "type": "text",
-          "align": "right",
-          "baseline": "middle",
-          "dx": -12,
-          "fontSize": 11.5,
-          "fontStyle": "italic"
         },
-        "encoding": {
-          "text": {"field": "Country", "type": "nominal"},
-          "color": {"value": "black"},
-          "opacity": {
-            "condition": {
-              "test": "datum['Country'] == 'China' || datum['Country'] == 'Singapore' || datum['Country'] == 'Australia' || datum['Country'] == 'New Zealand' || datum['Country'] == 'Italy' || datum['Country'] == 'Yemen' ||  datum['Country'] == 'United States'",
-              "value": 1
+        {
+            "mark": {
+                "type": "text",
+                "align": "right",
+                "baseline": "middle",
+                "dx": -12,
+                "fontSize": 11.5,
+                "fontStyle": "italic"
             },
-            "value": 0
-          },
-          "tooltip": [
-            {"field": "Country", "type": "nominal"},
-            {"field": "Confirmed", "type": "quantitative", "format": ","},
-            {"field": "Active", "type": "quantitative", "format": ","},
-            {"field": "Deaths", "type": "quantitative", "format": ","},
-            {"field": "Recovered", "type": "quantitative", "format": ","},
-            {
-              "field": "Cases per 10,000 Population",
-              "type": "quantitative",
-              "format": ".2f"
+            "encoding": {
+                "text": {
+                    "field": "st",
+                    "type": "nominal"
+                },
+                "color": {
+                    "value": "black"
+                },
+                "opacity": {
+                    "condition": {
+                        "test": "datum['st'] == 'tx' || datum['st'] == 'Singapore' || datum['Country'] == 'Australia' || datum['Country'] == 'New Zealand' || datum['Country'] == 'Italy' || datum['Country'] == 'Yemen' ||  datum['Country'] == 'United States'",
+                        "value": 1
+                    },
+                    "value": 0
+                },
+                "tooltip": [
+                    {
+                        "field": "st",
+                        "type": "nominal",
+                        "title": "State"
+                    },
+                    {
+                        "field": "inj",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "fat",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "mag",
+                        "type": "quantitative",
+                        "format": ","
+                    },
+                    {
+                        "field": "wid",
+                        "type": "quantitative",
+                        "format": ","
+                    }
+                ]
             }
-          ]
         }
-      }
     ]
-  }
+}

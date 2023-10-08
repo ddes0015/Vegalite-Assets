@@ -46,14 +46,30 @@
     ],
     "transform": [
         {
-            "filter": "datum.mag > Magnitude_above"
+            "filter": "datum.mag >= Magnitude_above"
         },
         {
             "filter": "datum.st === 'TX' || datum.st === 'KS' || datum.st === 'OK' || datum.st === 'FL' || datum.st === 'NE' || datum.st === 'IA'"
         },
         {
             "filter": "State_selection == null || datum.st == State_selection"
-        }
+        },
+        {
+            "window": [
+              {
+                "op": "dense_rank",
+                "field": "inj",
+                "as": "rank"
+              }
+            ],
+            "sort": [
+              {
+                "field": "inj",
+                "order": "descending"
+              }
+            ],
+            "groupby": ["st"]
+          }
     ],
     "encoding": {
         "x": {
@@ -67,6 +83,7 @@
         "y": {
             "field": "inj",
             "type": "quantitative",
+            "title":"Injuries",
             "axis": {
                 "tickCount": 6
             }
@@ -79,6 +96,7 @@
                 "size": {
                     "field": "mag",
                     "type": "quantitative",
+                    "title": "Magnitude (Fujita Scale)",
                     "scale": {
                         "type": "threshold",
                         "domain": [
@@ -91,11 +109,11 @@
                         ],
                         "range": [
                             10,
-                            20,
-                            30,
+                            25,
                             40,
-                            50,
-                            60
+                            60,
+                            90,
+                            120
                         ]
                     },
                     "legend": {
@@ -122,7 +140,8 @@
                             "#377eb8",
                             "#a65628"
                         ]
-                    }
+                    },
+                    "title": "States"
                 },
                 "opacity": {
                     "value": 0.6
@@ -136,20 +155,24 @@
                     {
                         "field": "inj",
                         "type": "quantitative",
+                        "title": "Injuries",
                         "format": ","
                     },
                     {
                         "field": "fat",
+                        "title": "Fatalities",
                         "type": "quantitative",
                         "format": ","
                     },
                     {
                         "field": "mag",
+                        "title": "Magnitude",
                         "type": "quantitative",
                         "format": ","
                     },
                     {
                         "field": "wid",
+                        "title": "Width (Yards)",
                         "type": "quantitative",
                         "format": ","
                     }
@@ -158,56 +181,26 @@
         },
         {
             "mark": {
-                "type": "text",
-                "align": "right",
-                "baseline": "middle",
-                "dx": -12,
-                "fontSize": 11.5,
-                "fontStyle": "italic"
+              "type": "text",
+              "align": "right",
+              "baseline": "middle",
+              "dx": -12,
+              "fontSize": 11.5,
+              "fontStyle": "italic"
             },
             "encoding": {
-                "text": {
-                    "field": "st",
-                    "type": "nominal"
+              "text": {
+                "condition": {
+                  "test": "datum.rank === 1",
+                  "field": "st",
+                  "type": "nominal"
                 },
-                "color": {
-                    "value": "black"
-                },
-                "opacity": {
-                    "condition": {
-                        "test": "datum['st'] == 'tx' || datum['st'] == 'Singapore' || datum['Country'] == 'Australia' || datum['Country'] == 'New Zealand' || datum['Country'] == 'Italy' || datum['Country'] == 'Yemen' ||  datum['Country'] == 'United States'",
-                        "value": 1
-                    },
-                    "value": 0
-                },
-                "tooltip": [
-                    {
-                        "field": "st",
-                        "type": "nominal",
-                        "title": "State"
-                    },
-                    {
-                        "field": "inj",
-                        "type": "quantitative",
-                        "format": ","
-                    },
-                    {
-                        "field": "fat",
-                        "type": "quantitative",
-                        "format": ","
-                    },
-                    {
-                        "field": "mag",
-                        "type": "quantitative",
-                        "format": ","
-                    },
-                    {
-                        "field": "wid",
-                        "type": "quantitative",
-                        "format": ","
-                    }
-                ]
+                "value": null
+              },
+              "color": {
+                "value": "black"
+              }
             }
-        }
+          }
     ]
 }

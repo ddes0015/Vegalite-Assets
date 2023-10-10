@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 700,
-    "height": 400,
+    "height": 375,
     "title": "Tornados of magnitude 4 or larger between 1950 and 2021 in the USA",
     "projection": {"type": "albersUsa"},
     "layer": [
@@ -20,18 +20,14 @@
         },
         "mark": {"type": "geoshape", "fill": "lightblue", "stroke": "white"}
       },
-      {
-        "data": {
-          "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/js/ne_110m_graticules_5.topojson",
-          "format": {"type": "topojson", "feature": "ne_110m_graticules_5"}
-        },
-        "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
-      },
       
       {
         "data": {
           "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
         },
+        "transform": [
+          {"filter": "datum.mag >= 4"}
+        ],
         "mark": {"type": "circle", "tooltip": {"content": "data"}},
         "encoding": {
           "longitude": {"field": "slon", "type": "quantitative"},
@@ -45,16 +41,16 @@
             {"field": "inj", "type": "quantitative", "title": "Injured"}
           ],
           "size": {
+            "field": "wid",
+            "type": "quantitative",
+            "title": "Width (Yards)",
+            "scale": {"domain": [2, 4000]}
+          },
+          "color": {
             "field": "mag",
             "type": "quantitative",
             "title": "Magnitude (Fujita scale)",
-            "scale": {"domain": [3, 18]}
-          },
-          "color": {
-            "field": "wid",
-            "type": "quantitative",
-            "title": "Width in yards",
-            "scale": {"scheme": "greens", "domain":[10,4000]}
+            "scale": {"scheme": "redblue", "domain":[4,7]}
           }
         }
       }

@@ -1,0 +1,42 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 300,
+    "height": 200,
+    "data": {
+      "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
+    },
+    "transform": [
+      {
+        "window": [{"op": "rank", "as": "rank"}],
+        "sort": [{"field": "state_count", "order": "descending"}],
+        "groupby": ["st"]
+      },
+      {
+        "filter": "datum.rank < 10"
+      },
+      {
+        "aggregate": [{"op": "sum", "field": "fat", "as": "total_fat"}],
+        "groupby": ["st", "yr"]
+      }
+    ],
+    "mark": "area",
+    "encoding": {
+      "x": {
+        "field": "yr",
+        "type": "temporal",
+        "axis": {"format": "%Y", "title": "Year"}
+      },
+      "y": {
+        "field": "total_fat",
+        "type": "quantitative",
+        "axis": {"title": "Total Fatalities"},
+        "stack": "zero"
+      },
+      "color": {
+        "field": "st",
+        "type": "nominal",
+        "legend": {"title": "State"}
+      }
+    }
+  }
+  

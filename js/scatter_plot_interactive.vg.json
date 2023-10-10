@@ -55,6 +55,12 @@
             "filter": "State_selection == null || datum.st == State_selection"
         },
         {
+            "filter": "datum.inj > 0"
+        },
+        {
+            "filter": "datum.fat > 0"
+        },
+        {
             "window": [
               {
                 "op": "dense_rank",
@@ -77,16 +83,17 @@
             "type": "quantitative",
             "title": "Fatalities",
             "axis": {
-                "tickCount": 7
-            }
+                "grid": false
+            },"scale":  {"type": "log", "domain": [1, 700], "padding": 25}
+            
         },
         "y": {
             "field": "inj",
             "type": "quantitative",
             "title":"Injuries",
             "axis": {
-                "tickCount": 6
-            }
+                "grid": false
+            },"scale": {"type": "log", "domain": [1, 2100], "padding": 25}
         }
     },
     "layer": [

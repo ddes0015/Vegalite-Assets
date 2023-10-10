@@ -1,0 +1,47 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "A radial chart displaying the count for the top 5 states.",
+    "width": 200,
+    "height": 200,
+    "config":{
+        "view": {
+            "stroke": null
+        }
+    },
+    "data": {
+      "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
+    },
+    "transform": [
+      {"sort": [{"field": "state_count", "order": "descending"}]},
+      {"window": [{"op": "row_number", "as": "rank"}]},
+      {"filter": "datum.rank <= 10"}
+    ],
+    "layer": [
+      {
+        "mark": {"type": "arc", "innerRadius": 20, "stroke": "#fff"}
+      },
+      
+      
+      {
+        "mark": {"type": "text", "radiusOffset": 10},
+        "encoding": {
+          "text": {"field": "state", "type": "nominal"}
+        }
+      },
+      {
+        "mark": {"type": "text", "radiusOffset": 35, "color": "black", "fontWeight": "bold"},
+        "encoding": {
+          "text": {"field": "state_count", "type": "quantitative"}
+        }
+      }
+    ],
+    "encoding": {
+      "theta": {"field": "state_count", "type": "quantitative", "stack": true},
+      "radius": {
+        "field": "state_count",
+        "scale": {"type": "sqrt", "zero": true, "rangeMin": 20}
+      },
+      "color": {"field": "state", "type": "nominal", "legend": null}
+    }
+  }
+  

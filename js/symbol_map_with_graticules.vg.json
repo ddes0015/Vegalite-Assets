@@ -4,6 +4,19 @@
     "height": 375,
     "title": "Tornados of magnitude 4 or larger between 1950 and 2021 in the USA",
     "projection": {"type": "albersUsa"},
+    "params": [
+      {
+        "name": "Year_Above",
+        "value": 1950,
+        "bind": {
+        "input": "range",
+        "min": 1950,
+        "max": 2021,
+        "step": 1,
+        "name": "Minimum Year: "
+        }
+        }
+    ],
     "layer": [
       
       {
@@ -11,22 +24,17 @@
           "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/js/us-10m.json",
           "format": {"type": "topojson", "feature": "states"}
         },
-        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "black"}
       },
-      {
-        "data": {
-          "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/js/ne_10m_ocean.json",
-          "format": {"type": "topojson", "feature": "ne_10m_ocean"}
-        },
-        "mark": {"type": "geoshape", "fill": "lightblue", "stroke": "white"}
-      },
+      
       
       {
         "data": {
           "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
         },
         "transform": [
-          {"filter": "datum.mag >= 4"}
+          {"filter": "datum.mag >= 4"},
+          {"filter": "datum.yr >= Year_Above"}
         ],
         "mark": {"type": "circle", "tooltip": {"content": "data"}},
         "encoding": {
@@ -50,9 +58,42 @@
             "field": "mag",
             "type": "quantitative",
             "title": "Magnitude (Fujita scale)",
-            "scale": {"scheme": "redblue", "domain":[4,7]}
+            "scale": {"scheme": "goldorange", "domain":[4,6]}
           }
         }
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
+        },
+        "transform": [
+          {"filter": "datum.mag >= 4"},
+          {"filter": "datum.yr >= Year_Above"},
+          {
+            "calculate": "datum.fat + datum.inj",
+            "as": "total_casualties"
+          },
+          {
+            "window": [
+              {
+                "op": "rank",
+                "field": "total_casualties",
+                "as": "rank"
+              }
+            ],
+            "sort": [{"field": "total_casualties", "order": "descending"}]
+          },
+          {
+            "filter": "datum.rank <= 5"
+          }
+        ],
+        "mark": {"type": "text", "dy": -10, "fontSize": 12, "fontWeight": "bold", "color": "black"},
+        "encoding": {
+          "longitude": {"field": "slon", "type": "quantitative"},
+          "latitude": {"field": "slat", "type": "quantitative"},
+          "text": {"field": "st", "type": "nominal"}
+        }
       }
+      
     ]
   }

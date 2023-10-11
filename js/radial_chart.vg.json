@@ -1,6 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "A radial chart displaying the count for the top 5 states.",
+    "title":{
+      "text": "Top 10 States - Based on count", "fontSize":15,"offset":15
+    },
     "width": 200,
     "height": 200,
     "config":{
@@ -41,7 +43,7 @@
         "field": "state_count",
         "scale": {"type": "sqrt", "zero": true, "rangeMin": 20}
       },
-      "color": {"field": "state", "type": "nominal", "legend": null}
+      "color": {"field": "state", "type": "nominal", "legend": null, "scale":{"scheme": "goldorange"}}
     }
   }
   

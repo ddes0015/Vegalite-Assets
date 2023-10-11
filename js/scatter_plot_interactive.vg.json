@@ -2,7 +2,7 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 300,
     "height": 200,
-    "title": "Injuries and Fatalities for Top 6 States",
+    "title": {"text": "Injuries and Fatalities for Top 6 States","fontSize":15,"offset":10},
     "data": {
         "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
     },
@@ -139,19 +139,12 @@
                             "NE",
                             "IA"
                         ],
-                        "range": [
-                            "#e41a1c",
-                            "#984ea3",
-                            "#ff7f00",
-                            "#a6cee3",
-                            "#377eb8",
-                            "#a65628"
-                        ]
+                        "scheme":"goldorange"
                     },
                     "title": "States"
                 },
                 "opacity": {
-                    "value": 0.6
+                    "value": 0.9
                 },
                 "tooltip": [
                     {

@@ -52,7 +52,8 @@
     "color": {
       "field": "st",
       "type": "nominal",
-      "legend": {"title": "State"}
+      "legend": {"title": "State"},
+      "scale":{"scheme":"goldorange"}
     },
     "tooltip": [
       {"field": "st", "title": "State"},

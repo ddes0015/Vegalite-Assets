@@ -2,7 +2,7 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 450,
     "height": 200,
-    "description": "Average Width of Tornados for Selected State over time",
+    "title":{"text":"Average Width over Time", "fontSize":15,"offset":15},
     "data": {"url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"},
     "selection": {
       "selectedState": {
@@ -38,7 +38,7 @@
     "encoding": {
       "x": {"timeUnit": "year", "field": "yr", "type": "temporal"},
       "y": {"aggregate": "mean", "field": "wid", "type": "quantitative"},
-      "color": {"field": "st", "type": "nominal","title":"State"}
+      "color": {"field": "st", "type": "nominal","title":"State","scale":{"scheme":"goldorange"}}
     }
   }
   

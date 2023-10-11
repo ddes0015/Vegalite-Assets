@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 250,
+    "width": 300,
     "height": 200,
     "title": "Injuries and Fatalities for Top 6 States",
     "data": {
@@ -103,7 +103,7 @@
                 "size": {
                     "field": "mag",
                     "type": "quantitative",
-                    "title": "Magnitude (Fujita Scale)",
+                    "title": "Magnitude (F)",
                     "scale": {
                         "type": "threshold",
                         "domain": [

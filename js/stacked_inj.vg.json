@@ -1,0 +1,63 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 150,
+    "height": 200,
+    "data": {
+      "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv",
+      "format": {
+        "type": "csv"
+      }
+    },
+    "params": [
+      {
+        "name": "Year_Above",
+        "value": 1950,
+        "bind": {
+          "input": "range",
+          "min": 1950,
+          "max": 2021,
+          "step": 1,
+          "name": "Minimum Year: "
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": {"field": "yr", "gte": {"signal": "Year_Above"}}
+      },
+      {
+        "aggregate": [{"op": "sum", "field": "inj", "as": "total_inj"}],
+        "groupby": ["st"]
+      },
+      {
+        "window": [{"op": "rank", "as": "rank"}],
+        "sort": [{"field": "total_inj", "order": "descending"}]
+      },
+      {
+        "filter": "datum.rank <= 10"
+      }
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {
+        "field": "st",
+        "type": "nominal",
+        "axis": {"title": "State"}
+      },
+      "y": {
+        "field": "total_inj",
+        "type": "quantitative",
+        "axis": {"title": "Total Injuries"}
+      },
+      "color": {
+        "field": "st",
+        "type": "nominal",
+        "legend": {"title": "State"}
+      },
+      "tooltip": [
+        {"field": "st", "title": "State"},
+        {"field": "total_inj", "title": "Total Injuries"}
+      ]
+    }
+  }
+  

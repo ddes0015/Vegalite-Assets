@@ -1,11 +1,11 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 450,
+    "width": 300,
     "height": 200,
     "title":{"text":"Average Width over Time", "fontSize":15,"offset":15},
     "data": {"url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"},
     "selection": {
-      "selectedState": {
+      "State": {
         "type": "single",
         "fields": ["st"],
         "bind": {
@@ -29,7 +29,7 @@
     },
     "transform": [
       {"filter": {"field": "st", "oneOf": ["TX","KS","OK","FL","NE"]}},
-      {"filter": {"selection": "selectedState"}}
+      {"filter": {"selection": "State"}}
     ],
     "mark": {
       "type": "line",
@@ -38,7 +38,7 @@
     "encoding": {
       "x": {"timeUnit": "year", "field": "yr", "type": "temporal"},
       "y": {"aggregate": "mean", "field": "wid", "type": "quantitative"},
-      "color": {"field": "st", "type": "nominal","title":"State","scale":{"scheme":"goldorange"}}
+      "color": {"field": "st", "type": "nominal","title":"State","scale":{"scheme":"dark2"}}
     }
   }
   

@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 300,
+    "width": 220,
     "height": 200,
     "title": {"text": "Injuries and Fatalities for Top 6 States","fontSize":15,"offset":10},
     "data": {
@@ -13,7 +13,7 @@
             "bind": {
                 "input": "range",
                 "min": 0,
-                "max": 7,
+                "max": 5,
                 "step": 1,
                 "name": "Minimum Magnitude: "
             }
@@ -138,8 +138,7 @@
                             "FL",
                             "NE",
                             "IA"
-                        ],
-                        "scheme":"goldorange"
+                        ]
                     },
                     "title": "States"
                 },
@@ -184,7 +183,7 @@
               "type": "text",
               "align": "right",
               "baseline": "middle",
-              "dx": -12,
+              "dx": -6,
               "fontSize": 11.5,
               "fontStyle": "italic"
             },

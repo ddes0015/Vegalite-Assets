@@ -53,7 +53,7 @@
       "field": "st",
       "type": "nominal",
       "legend": {"title": "State"},
-      "scale":{"scheme":"goldorange"}
+      "scale":{"scheme":"set3"}
     },
     "tooltip": [
       {"field": "st", "title": "State"},

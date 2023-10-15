@@ -43,7 +43,7 @@
         "field": "state_count",
         "scale": {"type": "sqrt", "zero": true, "rangeMin": 20}
       },
-      "color": {"field": "state", "type": "nominal", "legend": null, "scale":{"scheme": "goldorange"}}
+      "color": {"field": "state", "type": "nominal", "legend": null, "scale":{"scheme": "dark2"}}
     }
   }
   

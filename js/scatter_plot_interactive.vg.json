@@ -147,6 +147,12 @@
                         "type": "nominal",
                         "title": "State"
                     },
+                    
+                    {
+                        "field": "yr",
+                        "title": "Year",
+                        "type": "ordinal"
+                    },
                     {
                         "field": "inj",
                         "type": "quantitative",

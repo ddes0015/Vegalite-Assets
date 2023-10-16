@@ -1,8 +1,5 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title":{
-      "text": "Top 10 States - Based on count", "fontSize":15,"offset":15
-    },
     "width": 200,
     "height": 200,
     "config":{
@@ -43,7 +40,15 @@
         "field": "state_count",
         "scale": {"type": "sqrt", "zero": true, "rangeMin": 20}
       },
-      "color": {"field": "state", "type": "nominal", "legend": null, "scale":{"scheme": "dark2"}}
+      "color": {
+        "field": "state",
+        "type": "nominal",
+        "legend": null,
+        "scale": {
+            "domain": ["TX", "AL", "FL", "IA", "IL", "KS", "MO", "MS", "NE", "OK"],
+            "range": ["#377eb8", "#8dd3c7", "#984ea3", "#b2df8a", "#a6cee3", "#33a02c", "#fbb4ae", "#b15928", "#ccebc5", "#cbd5e8"]
+        }
+    }
     }
   }
   

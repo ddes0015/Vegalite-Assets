@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 150,
+    "width": 100,
     "height": 200,
     "data": {
       "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv",

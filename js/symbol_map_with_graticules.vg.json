@@ -3,12 +3,6 @@
     "width": 600,
     "height": 375,
     "config": {"view": {"stroke": null}},
-    "title": {
-      "text":"Tornados of Magnitude 4 or larger between 1950 and 2021 in the US",
-      "fontSize": 18,
-    "fontWeight": "bold",
-    "offset":60
-    },
     "projection": {"type": "albersUsa"},
     "params": [
       {
@@ -93,7 +87,7 @@
             "filter": "datum.rank <= 5"
           }
         ],
-        "mark": {"type": "text", "dy": -10, "fontSize": 12, "fontWeight": "bold", "color": "black"},
+        "mark": {"type": "text", "dy": -5, "fontSize": 12, "fontWeight": "bold", "color": "black"},
         "encoding": {
           "longitude": {"field": "slon", "type": "quantitative"},
           "latitude": {"field": "slat", "type": "quantitative"},

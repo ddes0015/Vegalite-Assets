@@ -2,7 +2,6 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 300,
     "height": 200,
-    "title":{"text":"Average Width over Time", "fontSize":15,"offset":15},
     "data": {"url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"},
     "selection": {
       "State": {
@@ -36,9 +35,37 @@
       "point": true
     },
     "encoding": {
-      "x": {"timeUnit": "year", "field": "yr", "type": "temporal"},
-      "y": {"aggregate": "mean", "field": "wid", "type": "quantitative"},
-      "color": {"field": "st", "type": "nominal","title":"State","scale":{"scheme":"dark2"}}
+      "x": {"timeUnit": "year", "field": "yr", "type": "temporal","title":"Year"},
+      "y": {"aggregate": "mean", "field": "wid", "type": "quantitative","title": "Average Width (Yards)"},
+      "color": {
+        "field": "st",
+        "type": "nominal",
+        "title": "State",
+        "scale": {
+          "domain": ["TX", "KS", "OK", "FL", "NE"],
+          "range": ["#377eb8", "#33a02c", "#cbd5e8", "#984ea3", "#ccebc5"]
+        }
+      },
+      "tooltip": [ 
+        {
+          "timeUnit": "year",
+          "field": "yr",
+          "type": "temporal",
+          "title": "Year"
+        },
+        {
+          "aggregate": "mean",
+          "field": "wid",
+          "type": "quantitative",
+          "format": ".1f",
+          "title": "Average Width (Yards)"
+        },
+        {
+          "field": "st",
+          "type": "nominal",
+          "title": "State"
+        }
+      ]
     }
   }
   

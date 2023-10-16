@@ -2,7 +2,6 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 220,
     "height": 200,
-    "title": {"text": "Injuries and Fatalities for Top 6 States","fontSize":15,"offset":10},
     "data": {
         "url": "https://raw.githubusercontent.com/ddes0015/Vegalite-Assets/main/data/us_tornado_dataset_1950_2021.csv"
     },
@@ -83,17 +82,20 @@
             "type": "quantitative",
             "title": "Fatalities",
             "axis": {
-                "grid": false
-            },"scale":  {"type": "log", "domain": [1, 700], "padding": 25}
-            
+                "grid": false,
+                "values": [1, 10, 100, 1000]
+            },
+            "scale": {"type": "log", "base": 10, "zero": false, "padding": 0.5}
         },
         "y": {
             "field": "inj",
             "type": "quantitative",
-            "title":"Injuries",
+            "title": "Injuries",
             "axis": {
-                "grid": false
-            },"scale": {"type": "log", "domain": [1, 2100], "padding": 25}
+                "grid": false,
+                "values": [1, 10, 100, 1000, 2000]
+            },
+            "scale": {"type": "log", "base": 10, "zero": false}
         }
     },
     "layer": [
@@ -131,19 +133,13 @@
                     "field": "st",
                     "type": "nominal",
                     "scale": {
-                        "domain": [
-                            "TX",
-                            "KS",
-                            "OK",
-                            "FL",
-                            "NE",
-                            "IA"
-                        ]
+                        "domain": ["TX", "KS", "OK", "FL", "NE", "IA"],
+                        "range": ["#377eb8", "#33a02c", "#cbd5e8", "#984ea3", "#ccebc5", "#b2df8a"]
                     },
                     "title": "States"
                 },
                 "opacity": {
-                    "value": 0.9
+                    "value": 0.7
                 },
                 "tooltip": [
                     {
